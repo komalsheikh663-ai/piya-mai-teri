@@ -41,12 +41,8 @@
         .author-line { color: #333; font-weight: bold; font-size: 17px; }
         .tagline-line { color: #555; font-size: 15px; }
 
-        .mini-btns { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
-        .m-btn { 
-            background: white; color: var(--main); border: 1.5px solid var(--main);
-            padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: bold;
-            cursor: pointer;
-        }
+        /* Space preserved for layout consistency */
+        .spacing-div { margin-bottom: 20px; }
 
         .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 15px; margin-bottom: 20px; }
         .p-btn { 
@@ -78,10 +74,7 @@
         <div class="tagline-line">Novels : jo dil m uter jayn❤️...</div>
     </div>
 
-    <div class="mini-btns">
-        <button class="m-btn" onclick="shareMe()">📤 Share App</button>
-        <button class="m-btn" onclick="rateMe()">⭐ Rate Us</button>
-    </div>
+    <div class="spacing-div"></div>
 
     <div class="grid-container">
         <button class="p-btn" onclick="openNovel('1n-HoSTw1pLrqlBrwFNmNI5EBclkccTEF')">Part 1</button>
@@ -116,16 +109,8 @@
             setTimeout(() => { ad.scrollIntoView({ behavior: 'smooth' }); }, 300);
         }
         function stopLoad() { document.getElementById('loadingIcon').style.display = 'none'; }
-        function shareMe() {
-            const shareData = {
-                title: 'Piya Mai Teri Novel',
-                text: 'Piya Mai Teri Urdu Novel by Husny Kanwal parhein!',
-                url: 'https://play.google.com/store/apps/details?id=com.piyamaiteri.novel'
-            };
-            if (navigator.share) { navigator.share(shareData).catch(err => console.log('Error sharing', err)); }
-            else { alert('App link copied to clipboard!'); }
-        }
-        function rateMe() { window.open('https://play.google.com/store/apps/details?id=com.piyamaiteri.novel', '_blank'); }
+        
+        // Anti-copy/inspect security scripts remain untouched
         document.addEventListener('keydown', e => { if (e.ctrlKey && ['c','u','s','p'].includes(e.key)) e.preventDefault(); });
     </script>
 </body>

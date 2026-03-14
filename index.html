@@ -4,46 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Piya Mai Teri - Urdu Novel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --main: #FFB6C1; --accent: #D81B60; --bg: #FFF0F5; }
+        :root { 
+            --pink-dark: #C2185B; 
+            --pink-light: #F06292; 
+            --bg: #FFF9FB; 
+        }
         
         body { 
             -webkit-user-select: none; user-select: none; 
-            font-family: 'Segoe UI', Roboto, sans-serif; 
+            font-family: 'Poppins', sans-serif; 
             text-align: center; background-color: var(--bg); 
             margin: 0; padding: 0; overflow-x: hidden;
         }
 
-        .app-header { background: white; padding: 20px 10px; border-bottom: 3px solid var(--main); }
-        .app-title { font-size: 32px; font-weight: 900; color: var(--accent); margin: 0; }
-        .app-sub { font-size: 14px; color: #444; font-style: italic; margin-top: 2px; }
+        /* Header - Stylish Text like the Picture */
+        .app-header { background: white; padding: 35px 10px; border-bottom: 2px solid #eee; }
+        .app-title { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 48px; 
+            font-weight: 800; 
+            color: var(--pink-dark); 
+            margin: 0;
+            letter-spacing: -1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .app-sub { font-size: 18px; color: #444; font-weight: 500; margin-top: 5px; }
 
         .info-card { 
-            background: white; margin: 25px 15px; padding: 18px; border-radius: 15px;
-            border-left: 6px solid var(--main); border-right: 6px solid var(--main);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            background: white; margin: 25px 15px; padding: 20px; border-radius: 8px;
+            border: 1px solid #f1f1f1;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
         }
 
-        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 20px 20px 20px; }
+        .novel-by-text { font-weight: 600; color: #222; font-size: 20px; }
+        .tagline-text { font-size: 16px; color: #666; margin-top: 8px; }
+
+        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 20px 20px 20px; }
+        
+        /* Stylish Slim Pink Buttons with White Outline */
         .p-btn { 
-            background: var(--main); color: white; border: none; padding: 16px;
-            border-radius: 10px; font-weight: bold; font-size: 15px; cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            background: linear-gradient(145deg, #ec407a, #d81b60); /* Metallic Pink Effect */
+            color: white; 
+            border: 2px solid white; /* White Box Outline */
+            padding: 12px 5px; /* Thinner and Slimmer as requested */
+            border-radius: 8px; 
+            font-weight: 600; 
+            font-size: 16px; 
+            cursor: pointer;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.15);
             transition: 0.3s;
+            outline: 1.5px solid var(--pink-dark);
         }
-        .p-btn:active { transform: scale(0.95); background: var(--accent); }
-        .p-btn:last-child { grid-column: span 2; }
+        .p-btn:active { transform: scale(0.96); opacity: 0.9; }
+        .p-btn:last-child { grid-column: span 2; padding: 14px; }
 
-        /* Banner Ad Styling */
-        .ad-container { 
-            margin: 10px auto 25px auto; 
-            max-width: 320px; 
-            min-height: 50px;
-            background: rgba(255,255,255,0.5);
-            border-radius: 5px;
-        }
+        .ad-container { margin: 10px auto 25px auto; max-width: 320px; min-height: 50px; }
 
-        /* Fullscreen Viewer */
+        /* Fullscreen Viewer Logic */
         #novelViewer {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: white; z-index: 10000; display: none;
@@ -52,7 +71,7 @@
         
         .loader { 
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-            border: 4px solid #f3f3f3; border-top: 4px solid var(--accent); 
+            border: 4px solid #f3f3f3; border-top: 4px solid var(--pink-dark); 
             border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; 
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
@@ -68,8 +87,8 @@
         </div>
 
         <div class="info-card">
-            <div style="font-weight:bold; color:#333; font-size: 18px;">Novel by Husny Kanwal</div>
-            <div style="font-size:15px; color:#666; margin-top:5px;">Jo dil mein utar jaye... ❤️</div>
+            <div class="novel-by-text">Novel's by Husny Kanwal...</div>
+            <div class="tagline-text">Novels : jo dil m uter jayn❤️...</div>
         </div>
 
         <div class="grid-container">
@@ -106,8 +125,6 @@
             viewer.style.display = 'block';
             document.getElementById('loadSpin').style.display = 'block';
             frame.src = `https://drive.google.com/file/d/${id}/preview`;
-            
-            // History state for Back Button
             window.history.pushState({viewingNovel: true}, "");
         }
 
@@ -123,7 +140,6 @@
             document.getElementById('loadSpin').style.display = 'none'; 
         }
 
-        // Security: No Right Click / Copy
         document.addEventListener('keydown', e => { 
             if (e.ctrlKey && ['c','u','s','p'].includes(e.key)) e.preventDefault(); 
         });

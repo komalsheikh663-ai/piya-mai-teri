@@ -110,12 +110,6 @@
         <button class="p-btn wide-btn" onclick="openNovel('1oFBhGAI1MGLeu5WA6EQDEdUxi_LO8SbU')">Part 5</button>
     </div>
 
-    <div class="ad-box" id="bannerAd" style="display:none; margin:10px auto; max-width:320px;">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-app-pub-8741169014792010" crossorigin="anonymous"></script>
-        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-app-pub-8741169014792010" data-ad-slot="7318695429" data-ad-format="auto" data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-
     <div class="novel-container" id="viewArea">
         <div class="security-overlay"></div> 
         <div class="iframe-security-shield" id="popOutShield"></div>
@@ -129,12 +123,10 @@
             const area = document.getElementById('viewArea');
             const frame = document.getElementById('novelFrame');
             const loader = document.getElementById('loadingIcon');
-            const ad = document.getElementById('bannerAd');
-            ad.style.display = 'block';
+            
             area.style.display = 'block';
             loader.style.display = 'block';
             frame.src = `https://drive.google.com/file/d/${id}/preview`;
-            setTimeout(() => { ad.scrollIntoView({ behavior: 'smooth' }); }, 300);
         }
         function stopLoad() { document.getElementById('loadingIcon').style.display = 'none'; }
         

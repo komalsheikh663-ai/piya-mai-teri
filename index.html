@@ -54,7 +54,6 @@
         }
         .wide-btn { grid-column: span 2; }
 
-        /* Novel Area Security */
         .novel-container { 
             position: relative; width: 100%; height: 85vh; 
             display: none; border-top: 2px solid var(--main); 
@@ -62,23 +61,16 @@
             overflow: hidden;
         }
         
-        /* Transparent shield to block long press / selective touch over main content */
-        .security-overlay { 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(255,255,255,0.001); z-index: 100; 
-            pointer-events: none; /* Let scroll touch pass through */
-        }
-
-        /* **** NEW: SPECIFIC SHIELD TO BLOCK THE POP-OUT BUTTON **** */
+        /* Security Shield */
         .iframe-security-shield {
             position: absolute;
             top: 0;
             right: 0;
-            width: 70px; /* Width to cover the button */
-            height: 60px; /* Height to cover the button */
-            background: rgba(255, 255, 255, 0.001); /* Invisible but present */
-            z-index: 105; /* Higher than iframe and other overlays */
-            pointer-events: auto; /* IMPORTANT: Captures and blocks the click */
+            width: 70px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.001);
+            z-index: 105;
+            pointer-events: auto;
         }
         
         iframe { width: 100%; height: 100%; border: none; position: relative; z-index: 1; }
@@ -111,9 +103,7 @@
     </div>
 
     <div class="novel-container" id="viewArea">
-        <div class="security-overlay"></div> 
         <div class="iframe-security-shield" id="popOutShield"></div>
-        
         <div class="loader" id="loadingIcon"></div>
         <iframe id="novelFrame" onload="stopLoad()"></iframe>
     </div>
@@ -127,18 +117,21 @@
             area.style.display = 'block';
             loader.style.display = 'block';
             frame.src = `https://drive.google.com/file/d/${id}/preview`;
+
+            // Adding smooth scroll (taake reader ko pata chale novel niche khul gaya hai)
+            setTimeout(() => {
+                area.scrollIntoView({ behavior: 'smooth' });
+            }, 300);
         }
-        function stopLoad() { document.getElementById('loadingIcon').style.display = 'none'; }
+
+        function stopLoad() { 
+            document.getElementById('loadingIcon').style.display = 'none'; 
+        }
         
-        // Anti-copy/inspect security scripts
+        // Security scripts
         document.addEventListener('keydown', e => { 
             if (e.ctrlKey && ['c','u','s','p','a'].includes(e.key)) e.preventDefault(); 
         });
-        
-        // Prevent context menu on the shield itself
-        document.getElementById('popOutShield').addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-        }, false);
     </script>
 </body>
 </html>
